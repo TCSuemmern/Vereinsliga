@@ -5,12 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TCS Tennis Vereinsmeisterschaft | Offizielle Tabelle</title>
 <style>
-/* 🎨 Basis-Styling & Schriftart */
+/* 🎨 Basis-Styling */
 :root {
-  --primary-color: #0056b3; /* Dezentes Profi-Blau */
+  --primary-color: #0056b3; 
   --text-color: #333;
   --bg-light: #f9f9f9;
   --border-color: #ddd;
+  --win-color: #28a745;
+  --lose-color: #dc3545;
 }
 
 body { 
@@ -20,7 +22,7 @@ body {
     color: var(--text-color);
 }
 
-/* 🏢 Header-Bereich mit Logo & Titel */
+/* 🏢 Header */
 .header-container {
     display: flex;
     align-items: center;
@@ -32,7 +34,7 @@ body {
 }
 
 #club-logo {
-    max-height: 50px; /* Logo-Größe anpassen */
+    max-height: 50px;
     width: auto;
 }
 
@@ -43,12 +45,13 @@ h2 {
     font-weight: 700;
 }
 
-/* 📊 Tabellen-Tuning */
+/* 📊 Tabellen-Design */
 .table-wrapper {
     overflow-x: auto;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Schatten für Tiefe */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     border-radius: 8px;
     background: #fff;
+    margin-bottom: 30px;
 }
 
 table { 
@@ -58,104 +61,81 @@ table {
 
 th, td { 
     border: 1px solid var(--border-color); 
-    padding: 16px; 
+    padding: 14px; 
     text-align: center; 
 }
 
 th { 
     background-color: var(--primary-color);
     color: white;
-    font-size: 1.1rem;
-    font-weight: 600;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-tr:nth-child(even) {
-    background-color: #f2f2f2; /* Gestreifter Look */
-}
+tr:nth-child(even) { background-color: #fcfcfc; }
 
-/* 🎾 Spielername: Clickable & Profi-Optik */
-.player-name {
-    text-align: left;
-    padding-left: 20px;
-}
-
+/* 🎾 Spieler Interaktion */
+.player-name { text-align: left; padding-left: 20px; }
 .player { 
     cursor: pointer; 
     color: var(--primary-color); 
     font-weight: 600;
-    transition: color 0.2s ease;
+    text-decoration: none;
+}
+.player:hover { text-decoration: underline; }
+
+/* 🔢 Highlights */
+.match-win { color: var(--win-color); font-weight: bold; }
+.match-lose { color: var(--lose-color); }
+td:last-child { font-weight: 800; color: #000; }
+
+/* 🔎 Details Tabelle (Bottom) */
+.match-table {
+    width: 100%;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
 }
 
-.player:hover {
-    text-decoration: underline;
-    color: #004494; /* Etwas dunkler beim Hover */
+.match-table th {
+    background: #444; /* Darker header for distinction */
 }
 
-/* 🔢 Zahlen & Highlights */
-td {
-    font-size: 1.2rem;
+.match-table td {
+    font-size: 0.95rem;
+    font-weight: 400; /* Force normal weight for all cells */
+    color: #444;
 }
 
-/* Diff fett */
-td:nth-child(6) {
-    font-weight: 700;
+.match-table td:first-child {
+    text-align: left;
+    color: #000;
+    font-weight: 500; 
 }
 
-/* Punkte FETT */
-td:last-child {
-    font-weight: 800;
-    font-size: 1.3rem;
-    color: #333;
-}
-
-/* 🔎 Details-Bereich */
 #details {
-    margin-top: 40px;
-    padding: 20px;
+    margin-top: 20px;
+    padding: 25px;
     background: #fff;
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    border: 1px solid #eee;
 }
 
 #details h3 {
-    font-size: 1.8rem;
+    margin-top: 0;
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+    display: inline-block;
+    padding-bottom: 5px;
     margin-bottom: 20px;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
 }
 
-#details div {
-    padding: 15px 0;
-    border-bottom: 1px solid #f0f0f0;
-    font-size: 1.1rem;
-}
-
-/* Hover-Effekt für Detail-Zeilen */
-#details div:hover {
-    background-color: #fafafa;
-}
-
-/* Ergebnis-Highlighting */
-.match-win { font-weight: bold; color: green; }
-.match-lose { color: #888; }
-.match-date { color: #666; font-style: italic; }
-
-/* 📱 Mobile Optimierung */
+/* 📱 Mobile */
 @media (max-width: 600px) {
-    body { margin: 10px; }
-    
-    .header-container { 
-        flex-direction: column; 
-        gap: 10px;
-        text-align: center;
-    }
-    #club-logo { max-height: 40px; }
-    h2 { font-size: 1.6rem; }
-
-    th { font-size: 0.9rem; padding: 12px 6px; }
-    td { font-size: 1rem; padding: 12px 6px; }
-    
-    .player-name { padding-left: 10px; }
+    .header-container { flex-direction: column; text-align: center; }
+    th, td { padding: 10px 5px; font-size: 0.9rem; }
 }
 </style>
 </head>
@@ -179,24 +159,24 @@ td:last-child {
                 <th>P</th>
             </tr>
         </thead>
-        <tbody>
-            </tbody>
+        <tbody></tbody>
     </table>
 </div>
 
-<div id="details"></div>
+<div id="details">
+    <p style="color: #666; font-style: italic;">Klicke auf einen Namen, um die Spielergebnisse anzuzeigen.</p>
+</div>
 
 <script>
 async function ladeDaten() {
     try {
         const res = await fetch("spiele.csv");
-		const text = await res.text();
-		const spiele = parseCSV(text);
-		renderStats(spiele);
+        const text = await res.text();
+        const spiele = parseCSV(text);
+        renderStats(spiele);
     } catch (e) {
-        console.error("Fehler beim Laden der Daten:", e);
-        // Fallback: Zeige Fehlermeldung
-        document.querySelector("#tabelle tbody").innerHTML = "<tr><td colspan='7'>Fehler beim Laden der Spieldaten.</td></tr>";
+        console.error("Fehler:", e);
+        document.querySelector("#tabelle tbody").innerHTML = "<tr><td colspan='7'>Fehler beim Laden der CSV.</td></tr>";
     }
 }
 
@@ -204,112 +184,53 @@ function renderStats(spiele) {
     const stats = {};
 
     spiele.forEach(spiel => {
-    const { spieler1, spieler2, saetze, tiebreak } = spiel;
+        const { spieler1, spieler2, saetze, tiebreak, datum } = spiel;
+        if (!stats[spieler1]) stats[spieler1] = initStat();
+        if (!stats[spieler2]) stats[spieler2] = initStat();
 
-    if (!stats[spieler1]) stats[spieler1] = initStat();
-    if (!stats[spieler2]) stats[spieler2] = initStat();
+        stats[spieler1].begegnungen++;
+        stats[spieler2].begegnungen++;
 
-    stats[spieler1].begegnungen++;
-    stats[spieler2].begegnungen++;
+        let sGew1 = 0, sGew2 = 0;
+        let gGew1 = 0, gGew2 = 0;
 
-    let satzGew1 = 0;
-    let satzGew2 = 0;
+        saetze.forEach(([a, b]) => {
+            gGew1 += a; gGew2 += b;
+            if (a > b) sGew1++; else sGew2++;
+        });
 
-    let games1 = 0;
-    let games2 = 0;
+        if (tiebreak) {
+            const [tb1, tb2] = tiebreak;
+            gGew1 += (tb1 > tb2 ? 1 : 0);
+            gGew2 += (tb2 > tb1 ? 1 : 0);
+            if (tb1 > tb2) sGew1++; else sGew2++;
+        }
 
-    let satzStrings = [];
+        const win1 = sGew1 > sGew2;
+        updatePlayerStats(stats, spieler1, spieler2, win1, gGew1, gGew2);
 
-    // Sätze auswerten
-    saetze.forEach(([a, b]) => {
-        games1 += a;
-        games2 += b;
+        // Consistency fix: Detail rows
+        const d = datum.split(".").slice(0,2).join(".") + ".";
+        const s1_str = saetze[0] ? `${saetze[0][0]}:${saetze[0][1]}` : "-";
+        const s2_str = saetze[1] ? `${saetze[1][0]}:${saetze[1][1]}` : "-";
+        const tb_str = tiebreak ? `${tiebreak[0]}:${tiebreak[1]}` : "-";
 
-        if (a > b) satzGew1++;
-        else satzGew2++;
-
-        satzStrings.push(`${a}:${b}`);
+        stats[spieler1].matches.push(formatRow(d, spieler1, spieler2, s1_str, s2_str, tb_str));
+        
+        // Reverse for Player 2
+        const rs1_str = saetze[0] ? `${saetze[0][1]}:${saetze[0][0]}` : "-";
+        const rs2_str = saetze[1] ? `${saetze[1][1]}:${saetze[1][0]}` : "-";
+        const rtb_str = tiebreak ? `${tiebreak[1]}:${tiebreak[0]}` : "-";
+        stats[spieler2].matches.push(formatRow(d, spieler2, spieler1, rs1_str, rs2_str, rtb_str));
     });
 
-    // Tiebreak (falls vorhanden)
-    let tbString = "";
-    if (tiebreak) {
-        const [tb1, tb2] = tiebreak;
-
-        tbString = ` ${tb1}:${tb2}`;
-
-        // zählt wie 1 Spiel
-        if (tb1 > tb2) {
-            games1 += 1;
-            satzGew1++;
-        } else {
-            games2 += 1;
-            satzGew2++;
-        }
-    }
-
-    // Gewinner bestimmen
-    let spieler1Gewinnt = satzGew1 > satzGew2;
-
-    if (spieler1Gewinnt) {
-        stats[spieler1].gewonnen++;
-        stats[spieler2].verloren++;
-        stats[spieler1].punkte += 3;
-        stats[spieler2].punkte += 1;
-    } else {
-        stats[spieler2].gewonnen++;
-        stats[spieler1].verloren++;
-        stats[spieler2].punkte += 3;
-        stats[spieler1].punkte += 1;
-    }
-
-    // Spiele addieren
-    stats[spieler1].spiele_gew += games1;
-    stats[spieler1].spiele_verl += games2;
-
-    stats[spieler2].spiele_gew += games2;
-    stats[spieler2].spiele_verl += games1;
-
-    // Text erzeugen
-	const kurzDatum = spiel.datum.split(".").slice(0,2).join(".") + ".";
-	let baseText = `${kurzDatum} ${spieler1}: ${spieler2} ${satzStrings.join(" ")}${tbString}`;
-    // Spieler 1 Sicht
-    stats[spieler1].matches.push(baseText);
-
-    // Spieler 2 Sicht (gedreht)
-    let reversedSets = saetze.map(([a,b]) => `${b}:${a}`).join(" ");
-    let reversedTb = "";
-
-    if (tiebreak) {
-        reversedTb = ` ${tiebreak[1]}:${tiebreak[0]}`;
-    }
-
-	let reversedText = `${kurzDatum} ${spieler2}: ${spieler1} ${reversedSets}${reversedTb}`;
-    stats[spieler2].matches.push(reversedText);
-});
-
     const tbody = document.querySelector("#tabelle tbody");
-    tbody.innerHTML = ""; // Clear existing data
+    tbody.innerHTML = "";
 
     Object.entries(stats)
-        .sort((a, b) => {
-				const sA = a[1];
-				const sB = b[1];
-
-				// 1. Punkte
-				if (sB.punkte !== sA.punkte) {
-					return sB.punkte - sA.punkte;
-				}
-
-				// 2. Differenz (gewonnene - verlorene Spiele)
-				const diffA = sA.spiele_gew - sA.spiele_verl;
-				const diffB = sB.spiele_gew - sB.spiele_verl;
-
-				return diffB - diffA;
-				}) // Primär: Punkte
-        .forEach(([name, s],index) => {
+        .sort((a, b) => b[1].punkte - a[1].punkte || (b[1].spiele_gew - b[1].spiele_verl) - (a[1].spiele_gew - a[1].spiele_verl))
+        .forEach(([name, s], index) => {
             const tr = document.createElement("tr");
-
             tr.innerHTML = `
                 <td>${index + 1}</td>
                 <td class="player-name"><span class="player">${name}</span></td>
@@ -319,11 +240,7 @@ function renderStats(spiele) {
                 <td>${s.spiele_gew}:${s.spiele_verl}</td>
                 <td>${s.punkte}</td>
             `;
-
-            tr.querySelector(".player").onclick = () => {
-                showDetails(name, s.matches);
-            };
-
+            tr.querySelector(".player").onclick = () => showDetails(name, s.matches);
             tbody.appendChild(tr);
         });
 }
@@ -332,55 +249,46 @@ function initStat() {
     return { begegnungen:0, gewonnen:0, verloren:0, spiele_gew:0, spiele_verl:0, punkte:0, matches:[] };
 }
 
-function recordMatchResult(stats, winner, loser) {
-    stats[winner].gewonnen++;
-    stats[loser].verloren++;
-    stats[winner].punkte += 3;
-    stats[loser].punkte += 1;
+function updatePlayerStats(stats, p1, p2, win1, g1, g2) {
+    stats[p1].punkte += win1 ? 3 : 1;
+    stats[p2].punkte += win1 ? 1 : 3;
+    stats[p1].gewonnen += win1 ? 1 : 0;
+    stats[p2].gewonnen += win1 ? 0 : 1;
+    stats[p1].verloren += win1 ? 0 : 1;
+    stats[p2].verloren += win1 ? 1 : 0;
+    stats[p1].spiele_gew += g1; stats[p1].spiele_verl += g2;
+    stats[p2].spiele_gew += g2; stats[p2].spiele_verl += g1;
 }
 
-function formatMatchDetail(datum, me, opponent, myScore, oppScore) {
-    const dStr = `<span class="match-date">${datum}</span>`;
-    if (myScore > oppScore) {
-        return `<div>${dStr} <strong>${me}</strong> vs ${opponent} <span class="match-win">${myScore}:${oppScore}</span></div>`;
-    } else {
-        return `<div>${dStr} ${me} vs <strong>${opponent}</strong> <span class="match-lose">${myScore}:${oppScore}</span></div>`;
-    }
+function formatRow(date, p1, p2, s1, s2, tb) {
+    // Removed <strong> tags to ensure no accidental bolding
+    return `<tr>
+        <td>${date} vs ${p2}</td>
+        <td>${s1}</td>
+        <td>${s2}</td>
+        <td>${tb}</td>
+    </tr>`;
 }
 
-function showDetails(name, matchesHtml) {
-    const detailsDiv = document.getElementById("details");
-
-    detailsDiv.innerHTML = `<h3>Spiele von ${name}</h3>` +
-        matchesHtml.map(m => `<div>${m}</div>`).join("");
+function showDetails(name, rows) {
+    const div = document.getElementById("details");
+    div.innerHTML = `<h3>Ergebnisse: ${name}</h3>
+    <table class="match-table">
+        <thead><tr><th>Begegnung</th><th>S1</th><th>S2</th><th>TB</th></tr></thead>
+        <tbody>${rows.join("")}</tbody>
+    </table>`;
+    div.scrollIntoView({ behavior: 'smooth' });
 }
+
 function parseCSV(text) {
-    const lines = text.trim().split("\n");
-    const spiele = [];
-
-    for (let i = 1; i < lines.length; i++) {
-        const [datum, spieler1, spieler2, s1, s2, tb] = lines[i].split(",");
-
-        const saetze = [
-            s1.split(":").map(Number),
-            s2.split(":").map(Number)
-        ];
-
-        let tiebreak = null;
-        if (tb && tb.includes(":")) {
-            tiebreak = tb.split(":").map(Number);
-        }
-
-        spiele.push({
-            datum,
-            spieler1,
-            spieler2,
-            saetze,
-            tiebreak
-        });
-    }
-
-    return spiele;
+    return text.trim().split("\n").slice(1).map(line => {
+        const [datum, spieler1, spieler2, s1, s2, tb] = line.split(",");
+        return {
+            datum, spieler1, spieler2,
+            saetze: [s1.split(":").map(Number), s2.split(":").map(Number)],
+            tiebreak: tb && tb.includes(":") ? tb.split(":").map(Number) : null
+        };
+    });
 }
 ladeDaten();
 </script>
