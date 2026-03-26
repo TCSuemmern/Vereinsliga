@@ -271,8 +271,8 @@ function renderStats(spiele) {
     stats[spieler2].spiele_verl += games1;
 
     // Text erzeugen
-    let baseText = `${spiel.datum} ${spieler1}: ${spieler2} ${satzStrings.join(" ")}${tbString}`;
-
+	const kurzDatum = spiel.datum.split(".").slice(0,2).join(".") + ".";
+	let baseText = `${kurzDatum} ${spieler1}: ${spieler2} ${satzStrings.join(" ")}${tbString}`;
     // Spieler 1 Sicht
     stats[spieler1].matches.push(baseText);
 
@@ -284,8 +284,7 @@ function renderStats(spiele) {
         reversedTb = ` ${tiebreak[1]}:${tiebreak[0]}`;
     }
 
-    let reversedText = `${spiel.datum} ${spieler2}: ${spieler1} ${reversedSets}${reversedTb}`;
-
+	let reversedText = `${kurzDatum} ${spieler2}: ${spieler1} ${reversedSets}${reversedTb}`;
     stats[spieler2].matches.push(reversedText);
 });
 
@@ -352,7 +351,7 @@ function formatMatchDetail(datum, me, opponent, myScore, oppScore) {
 function showDetails(name, matchesHtml) {
     const detailsDiv = document.getElementById("details");
 
-    detailsDiv.innerHTML = `<h3>Spiele-Historie von ${name}</h3>` +
+    detailsDiv.innerHTML = `<h3>Spiele von ${name}</h3>` +
         matchesHtml.map(m => `<div>${m}</div>`).join("");
 }
 function parseCSV(text) {
